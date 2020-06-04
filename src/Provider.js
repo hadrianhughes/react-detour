@@ -3,17 +3,30 @@ import PropTypes from 'prop-types';
 import DetourContext from './Context';
 import apiFetch from './api';
 
-export const DetourProvider = ({ children, api, fetchOptions }) => {
+const compileMiddleware = fns => x => fns.reduce((acc, f) => f(acc), x);
+
+export const DetourProvider = ({
+  children,
+  api,
+  fetchOptions,
+  pre,
+  post
+}) => {
   const [data, setData] = useState({});
+
+  const preMiddleware  = compileMiddleware(pre);
+  const postMiddleware = compileMiddleware(post);
 
   const handler = {
     get: function (target, path) {
+      const finalPath = preMiddleware(path);
+
       if (!target[path]) {
-        apiFetch(api, path, fetchOptions)
+        apiFetch(api, finalPath, fetchOptions)
           .then(result => {
             setData({
               ...data,
-              [path]: result
+              [path]: postMiddleware(result)
             })
           });
       }
@@ -34,7 +47,9 @@ export const DetourProvider = ({ children, api, fetchOptions }) => {
 DetourProvider.propTypes = {
   children: PropTypes.node,
   api: PropTypes.string.isRequired,
-  fetchOptions: PropTypes.object
+  fetchOptions: PropTypes.object,
+  pre: PropTypes.arrayOf(PropTypes.func),
+  post: PropTypes.arrayOf(PropTypes.func)
 };
 
 export default DetourProvider;
