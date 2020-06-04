@@ -52,4 +52,11 @@ DetourProvider.propTypes = {
   post: PropTypes.arrayOf(PropTypes.func)
 };
 
+DetourProvider.defaultProps = {
+  children: null,
+  fetchOptions: {},
+  pre: [],
+  post: []
+};
+
 export default DetourProvider;
