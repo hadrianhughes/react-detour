@@ -16,7 +16,8 @@
     "webpack-cli": "^3.3.11"
   },
   "scripts": {
-    "test": "npm test"
+    "test": "jest ./src",
+    "build": "webpack"
   },
   "keywords": [
     "react",
