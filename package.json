@@ -26,6 +26,7 @@
   },
   "scripts": {
     "test": "jest ./src",
+    "coverage": "jest ./src --coverage",
     "build": "webpack"
   },
   "keywords": [

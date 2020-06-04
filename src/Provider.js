@@ -9,7 +9,7 @@ export const DetourProvider = ({ children, api }) => {
   const handler = {
     get: function (target, path) {
       if (!target[path]) {
-        apiFetch(api, path, fetchOptions)
+        apiFetch(api, path)
           .then(result => {
             setData({
               ...data,

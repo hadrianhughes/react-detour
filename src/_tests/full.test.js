@@ -1,8 +1,5 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import fetchMock from 'fetch-mock';
-import { createWaitForElement } from 'enzyme-wait';
 import { useDetour, DetourProvider } from '../index';
 import apiFetch from '../api';
 
