@@ -1,0 +1,24 @@
+{
+  "name": "react-detour",
+  "version": "0.0.0",
+  "description": "A React Context component for fetching and caching API data using a Proxy layer",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^16.13.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "react",
+    "context",
+    "proxy",
+    "api",
+    "fetch",
+    "cache",
+    "caching"
+  ],
+  "author": "Hadrian Hughes",
+  "license": "MIT"
+}
