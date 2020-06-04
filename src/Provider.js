@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DetourContext from './Context';
+import apiFetch from './api';
 
 export const DetourProvider = ({ children, api }) => {
   const [data, setData] = useState({});
@@ -7,9 +8,13 @@ export const DetourProvider = ({ children, api }) => {
   const handler = {
     get: function (target, path) {
       if (!target[path]) {
-        fetch(api + path)
-          .then(response => response.json())
-          .then(setData);
+        apiFetch(api, path)
+          .then(result => {
+            setData({
+              ...data,
+              [path]: result
+            })
+          });
       }
 
       return target[path];
@@ -19,7 +24,7 @@ export const DetourProvider = ({ children, api }) => {
   const proxiedData = new Proxy(data, handler);
 
   return (
-    <DetourContext.Provider value={{ data: proxiedData }}>
+    <DetourContext.Provider value={proxiedData}>
       { children }
     </DetourContext.Provider>
   );
