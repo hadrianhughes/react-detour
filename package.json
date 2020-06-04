@@ -2,10 +2,13 @@
   "name": "react-detour",
   "version": "0.0.0",
   "description": "A React Context component for fetching and caching API data using a Proxy layer",
-  "main": "index.js",
+  "main": "./build/index.js",
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
